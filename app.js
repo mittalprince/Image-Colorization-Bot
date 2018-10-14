@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,6 +9,8 @@ var indexRouter = require('./routes/index');
 var getupdateRouter = require('./routes/getUpdate');
 
 var app = express();
+
+var port = process.env.PORT || 8050;
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -22,4 +25,6 @@ app.use(function(req, res, next) {
   res.sendStatus(404);
 });
 
-module.exports = app;
+app.listen(port, function(){
+	console.log('Server is listening at port: ', port);
+})
